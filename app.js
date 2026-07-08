@@ -22,14 +22,16 @@ const btnReten = document.getElementById("btnReten");
 function guardar() {
     localStorage.setItem("estado", JSON.stringify(estado));
 }
-
 function actualizar() {
-   document.getElementById("totalCaliu").textContent = estado.cocina.caliu;
-document.getElementById("totalFritas").textContent = estado.cocina.fritas;
-document.getElementById("totalBravas").textContent = estado.cocina.bravas;
-document.getElementById("totalPan").textContent = estado.cocina.pan;
-document.getElementById("totalCanelones").textContent = estado.cocina.canelones;
-document.getElementById("totalMediaCaliu").textContent = estado.cocina.pack1;
+
+    stockActual.textContent = estado.stock;
+
+    document.getElementById("totalCaliu").textContent = estado.cocina.caliu;
+    document.getElementById("totalFritas").textContent = estado.cocina.fritas;
+    document.getElementById("totalBravas").textContent = estado.cocina.bravas;
+    document.getElementById("totalPan").textContent = estado.cocina.pan;
+    document.getElementById("totalCanelones").textContent = estado.cocina.canelones;
+    document.getElementById("totalMediaCaliu").textContent = estado.cocina.pack1;
 
     stockInicial.disabled = estado.iniciado;
     btnIniciar.disabled = estado.iniciado;
@@ -80,10 +82,19 @@ document.getElementById("reiniciar").addEventListener("click", () => {
 
     localStorage.removeItem("estado");
 
-    estado = {
-        iniciado: false,
-        stock: 0
-    };
+ estado = {
+    iniciado:false,
+    stock:0,
+
+    cocina:{
+        caliu:0,
+        fritas:0,
+        bravas:0,
+        pan:0,
+        canelones:0,
+        pack1:0
+    }
+};
 
     stockInicial.value = "";
 
