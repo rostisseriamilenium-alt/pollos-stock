@@ -322,7 +322,7 @@ document.getElementById("venderMedio").onclick=()=>{
 let packPendiente = null;
 
 // Elementos del modal
-const modalPatatas = document.getElementById("modalPatatas");
+const selectorPatatas=document.getElementById("selectorPatatas");
 
 const btnCaliu = document.getElementById("btnCaliu");
 const btnFritas = document.getElementById("btnFritas");
@@ -346,7 +346,7 @@ document.getElementById("pack2").onclick = () => {
 
     packPendiente = "pack2";
 
-    modalPatatas.classList.remove("oculto");
+    selectorPatatas.classList.remove("oculto");
 
 };
 
@@ -365,7 +365,7 @@ document.getElementById("pack3").onclick = () => {
 
     packPendiente = "pack3";
 
-    modalPatatas.classList.remove("oculto");
+    selectorPatatas.classList.add("oculto");
 
 };
 
