@@ -7,134 +7,210 @@
 
 body{
     background:#f2f2f2;
+    color:#333;
 }
 
 .contenedor{
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
     padding:20px;
 }
 
 h1{
     text-align:center;
-    margin-bottom:20px;
     color:#d32f2f;
+    margin-bottom:25px;
+    font-size:42px;
 }
 
 h2{
-    margin:20px 0 10px;
-    text-align:center;
+    margin:25px 0 15px;
+    color:#444;
 }
 
-.stock{
-    background:white;
-    border-radius:15px;
-    padding:20px;
-    text-align:center;
-    margin-bottom:20px;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
-}
-
-#stockActual{
-    font-size:80px;
-    font-weight:bold;
-    color:#2e7d32;
-}
-
-.inicio{
-    background:white;
-    padding:15px;
-    border-radius:15px;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
-}
-
-.fila{
-    display:flex;
-    gap:10px;
-    margin-top:10px;
-}
-
-input{
-    flex:1;
-    font-size:28px;
-    padding:15px;
-    border-radius:10px;
-    border:2px solid #ccc;
-}
-
-button{
-    cursor:pointer;
-    border:none;
-    border-radius:12px;
-    font-size:24px;
-    font-weight:bold;
-}
-
-#btnAgregar{
-    background:#43a047;
-    color:white;
-    padding:15px 25px;
-}
-
-.botones2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.botones2 button{
-    background:#ff9800;
-    color:white;
-    padding:35px;
-    font-size:30px;
-}
-
-.packs{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:15px;
-}
-
-.packs button{
-    background:#1976d2;
-    color:white;
-    padding:30px;
-}
-
+.stock,
+.card,
 .resumen{
     background:white;
     border-radius:15px;
     padding:20px;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    box-shadow:0 3px 12px rgba(0,0,0,.15);
 }
 
-.resumen p{
+.numero{
+    text-align:center;
+    font-size:90px;
+    color:#2e7d32;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.inicioDia{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.inicioDia input{
+    flex:1;
+    min-width:180px;
+    padding:18px;
     font-size:28px;
-    padding:8px 0;
+    border-radius:10px;
+    border:2px solid #bbb;
+}
+
+button{
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:22px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+#btnIniciar{
+    background:#43a047;
+    color:white;
+    padding:18px 25px;
+}
+
+#btnReten{
+    background:#fb8c00;
+    color:white;
+    padding:18px 25px;
+}
+
+.venta{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.packs{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card h3{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.cantidad{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.cantidad span{
+    font-size:38px;
+    font-weight:bold;
+    width:60px;
+    text-align:center;
+}
+
+.mas,
+.menos{
+    width:60px;
+    height:60px;
+    font-size:34px;
+    background:#1976d2;
+    color:white;
+}
+
+.verde{
+    width:100%;
+    background:#43a047;
+    color:white;
+    padding:18px;
+}
+
+.azul{
+    width:100%;
+    background:#1565c0;
+    color:white;
+    padding:18px;
+}
+
+.naranja{
+    width:100%;
+    background:#ef6c00;
+    color:white;
+    padding:18px;
+}
+
+.sueltos{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.sueltos button{
+    background:#8e24aa;
+    color:white;
+    padding:25px;
+}
+
+.resumen{
+    display:grid;
+    gap:12px;
+}
+
+.resumen div{
     display:flex;
     justify-content:space-between;
+    font-size:28px;
+    border-bottom:1px solid #ddd;
+    padding:10px 0;
 }
 
 .inferior{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:15px;
-    margin-top:25px;
+    gap:20px;
+    margin:30px 0;
 }
 
 #deshacer{
     background:#757575;
     color:white;
-    padding:25px;
+    padding:22px;
 }
 
 #reiniciar{
-    background:#d32f2f;
+    background:#c62828;
     color:white;
-    padding:25px;
+    padding:22px;
 }
 
-hr{
-    margin:25px 0;
-    border:none;
+@media(max-width:900px){
+
+.venta{
+    grid-template-columns:1fr;
+}
+
+.packs{
+    grid-template-columns:1fr;
+}
+
+.sueltos{
+    grid-template-columns:1fr 1fr;
+}
+
+.inferior{
+    grid-template-columns:1fr;
+}
+
+.numero{
+    font-size:70px;
+}
+
 }
