@@ -314,3 +314,116 @@ document.getElementById("venderMedio").onclick=()=>{
 
 };
 
+// ===============================
+// PARTE 3
+// PACK 2 - PACK 3
+// ===============================
+
+let packPendiente = null;
+
+// Elementos del modal
+const modalPatatas = document.getElementById("modalPatatas");
+
+const btnCaliu = document.getElementById("btnCaliu");
+const btnFritas = document.getElementById("btnFritas");
+const btnBravas = document.getElementById("btnBravas");
+const cerrarModal = document.getElementById("cerrarModal");
+
+
+// -------- ABRIR MODAL --------
+
+document.getElementById("pack2").onclick = () => {
+
+    if(!estado.iniciado){
+        alert("Primero inicia el día");
+        return;
+    }
+
+    if(estado.stock < cantidades.pack2){
+        alert("No hay suficientes pollos");
+        return;
+    }
+
+    packPendiente = "pack2";
+
+    modalPatatas.classList.remove("oculto");
+
+};
+
+
+document.getElementById("pack3").onclick = () => {
+
+    if(!estado.iniciado){
+        alert("Primero inicia el día");
+        return;
+    }
+
+    if(estado.stock < cantidades.pack3){
+        alert("No hay suficientes pollos");
+        return;
+    }
+
+    packPendiente = "pack3";
+
+    modalPatatas.classList.remove("oculto");
+
+};
+
+
+// ---------- CANCELAR ----------
+
+cerrarModal.onclick = () => {
+
+    modalPatatas.classList.add("oculto");
+
+};
+
+
+// ---------- ELEGIR PATATAS ----------
+
+btnCaliu.onclick = ()=> procesarPack("caliu");
+
+btnFritas.onclick = ()=> procesarPack("fritas");
+
+btnBravas.onclick = ()=> procesarPack("bravas");
+
+
+// ---------- PROCESAR ----------
+
+function procesarPack(tipoPatata){
+
+    estado.historial.push(
+        JSON.parse(JSON.stringify(estado))
+    );
+
+    if(packPendiente==="pack2"){
+
+        let c = cantidades.pack2;
+
+        estado.stock -= c;
+
+        estado.cocina.pan += c;
+
+        estado.cocina[tipoPatata] += c;
+
+    }
+
+    if(packPendiente==="pack3"){
+
+        let c = cantidades.pack3;
+
+        estado.stock -= c;
+
+        estado.cocina.pan += c;
+
+        estado.cocina[tipoPatata] += c;
+
+        estado.cocina.canelones += c;
+
+    }
+
+    modalPatatas.classList.add("oculto");
+
+    actualizarPantalla();
+
+}
