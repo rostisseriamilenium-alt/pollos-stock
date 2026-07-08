@@ -142,3 +142,175 @@ btnReten.onclick=()=>{
 // ---------- CARGAR ----------
 
 actualizarPantalla();
+
+// ===============================
+// PARTE 2
+// Cantidades y venta rápida
+// ===============================
+
+// ----- CANTIDADES -----
+
+let cantidades = {
+
+    pollo:1,
+    medio:1,
+    pack2:1,
+    pack3:1,
+    pack1:1
+
+};
+
+function actualizarCantidades(){
+
+    document.getElementById("polloCantidad").innerText=cantidades.pollo;
+    document.getElementById("medioCantidad").innerText=cantidades.medio;
+
+    document.getElementById("pack2Cantidad").innerText=cantidades.pack2;
+    document.getElementById("pack3Cantidad").innerText=cantidades.pack3;
+    document.getElementById("pack1Cantidad").innerText=cantidades.pack1;
+
+}
+
+actualizarCantidades();
+
+
+// BOTONES + Y -
+
+document.querySelectorAll(".mas").forEach(btn=>{
+
+    btn.onclick=()=>{
+
+        let id=btn.dataset.target;
+
+        switch(id){
+
+            case "polloCantidad":
+                if(cantidades.pollo<6) cantidades.pollo++;
+            break;
+
+            case "medioCantidad":
+                if(cantidades.medio<6) cantidades.medio++;
+            break;
+
+            case "pack2Cantidad":
+                if(cantidades.pack2<6) cantidades.pack2++;
+            break;
+
+            case "pack3Cantidad":
+                if(cantidades.pack3<6) cantidades.pack3++;
+            break;
+
+            case "pack1Cantidad":
+                if(cantidades.pack1<6) cantidades.pack1++;
+            break;
+
+        }
+
+        actualizarCantidades();
+
+    }
+
+});
+
+document.querySelectorAll(".menos").forEach(btn=>{
+
+    btn.onclick=()=>{
+
+        let id=btn.dataset.target;
+
+        switch(id){
+
+            case "polloCantidad":
+                if(cantidades.pollo>1) cantidades.pollo--;
+            break;
+
+            case "medioCantidad":
+                if(cantidades.medio>1) cantidades.medio--;
+            break;
+
+            case "pack2Cantidad":
+                if(cantidades.pack2>1) cantidades.pack2--;
+            break;
+
+            case "pack3Cantidad":
+                if(cantidades.pack3>1) cantidades.pack3--;
+            break;
+
+            case "pack1Cantidad":
+                if(cantidades.pack1>1) cantidades.pack1--;
+            break;
+
+        }
+
+        actualizarCantidades();
+
+    }
+
+});
+
+
+// ===============================
+// VENDER POLLOS
+// ===============================
+
+document.getElementById("venderPollo").onclick=()=>{
+
+    if(!estado.iniciado){
+
+        alert("Primero inicia el día");
+
+        return;
+
+    }
+
+    let cantidad=cantidades.pollo;
+
+    if(estado.stock<cantidad){
+
+        alert("No hay suficientes pollos");
+
+        return;
+
+    }
+
+    estado.historial.push(JSON.parse(JSON.stringify(estado)));
+
+    estado.stock-=cantidad;
+
+    actualizarPantalla();
+
+};
+
+
+// ===============================
+// VENDER MEDIOS
+// ===============================
+
+document.getElementById("venderMedio").onclick=()=>{
+
+    if(!estado.iniciado){
+
+        alert("Primero inicia el día");
+
+        return;
+
+    }
+
+    let cantidad=cantidades.medio*0.5;
+
+    if(estado.stock<cantidad){
+
+        alert("No hay suficientes pollos");
+
+        return;
+
+    }
+
+    estado.historial.push(JSON.parse(JSON.stringify(estado)));
+
+    estado.stock-=cantidad;
+
+    actualizarPantalla();
+
+};
+
