@@ -1,5 +1,140 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
 body{
-    font-family: Arial;
-    margin:20px;
-    background:#f5f5f5;
+    background:#f2f2f2;
+}
+
+.contenedor{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#d32f2f;
+}
+
+h2{
+    margin:20px 0 10px;
+    text-align:center;
+}
+
+.stock{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+#stockActual{
+    font-size:80px;
+    font-weight:bold;
+    color:#2e7d32;
+}
+
+.inicio{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.fila{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+input{
+    flex:1;
+    font-size:28px;
+    padding:15px;
+    border-radius:10px;
+    border:2px solid #ccc;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+    border-radius:12px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+#btnAgregar{
+    background:#43a047;
+    color:white;
+    padding:15px 25px;
+}
+
+.botones2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.botones2 button{
+    background:#ff9800;
+    color:white;
+    padding:35px;
+    font-size:30px;
+}
+
+.packs{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:15px;
+}
+
+.packs button{
+    background:#1976d2;
+    color:white;
+    padding:30px;
+}
+
+.resumen{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.resumen p{
+    font-size:28px;
+    padding:8px 0;
+    display:flex;
+    justify-content:space-between;
+}
+
+.inferior{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:25px;
+}
+
+#deshacer{
+    background:#757575;
+    color:white;
+    padding:25px;
+}
+
+#reiniciar{
+    background:#d32f2f;
+    color:white;
+    padding:25px;
+}
+
+hr{
+    margin:25px 0;
+    border:none;
 }
