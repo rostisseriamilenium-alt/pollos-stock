@@ -427,3 +427,62 @@ function procesarPack(tipoPatata){
     actualizarPantalla();
 
 }
+// ===============================
+// PARTE 5
+// DESHACER Y REINICIAR
+// ===============================
+
+// ---------- DESHACER ----------
+
+document.getElementById("deshacer").onclick = () => {
+
+    if (estado.historial.length === 0) {
+        alert("No hay ninguna venta para deshacer");
+        return;
+    }
+
+    estado = estado.historial.pop();
+
+    actualizarPantalla();
+
+};
+
+
+// ---------- REINICIAR DÍA ----------
+
+document.getElementById("reiniciar").onclick = () => {
+
+    if (!confirm("¿Seguro que quieres reiniciar el día?")) {
+        return;
+    }
+
+    localStorage.removeItem("estado");
+
+    estado = {
+
+        iniciado:false,
+
+        stock:0,
+
+        stockInicial:0,
+
+        cocina:{
+            caliu:0,
+            fritas:0,
+            bravas:0,
+            mediaCaliu:0,
+            pan:0,
+            canelones:0
+        },
+
+        historial:[]
+
+    };
+
+    stockInicial.disabled=false;
+    btnIniciar.disabled=false;
+    stockInicial.value="";
+
+    actualizarPantalla();
+
+};
