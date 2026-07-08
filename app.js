@@ -1,84 +1,144 @@
-// ===== VARIABLES =====
+// ===============================
+// CONTROL DE POLLOS
+// PARTE 1
+// ===============================
 
-let stock = Number(localStorage.getItem("stock")) || 0;
+// ---------- ESTADO ----------
 
-let cocina = JSON.parse(localStorage.getItem("cocina")) || {
-    caliu:0,
-    fritas:0,
-    bravas:0,
-    panes:0,
-    canelones:0
+let estado = JSON.parse(localStorage.getItem("estado")) || {
+
+    iniciado:false,
+
+    stock:0,
+
+    stockInicial:0,
+
+    cocina:{
+        caliu:0,
+        fritas:0,
+        bravas:0,
+        mediaCaliu:0,
+        pan:0,
+        canelones:0
+    },
+
+    historial:[]
+
 };
 
-// ===== ELEMENTOS =====
+
+// ---------- ELEMENTOS ----------
 
 const stockActual=document.getElementById("stockActual");
+
 const stockInicial=document.getElementById("stockInicial");
 
-const btnAgregar=document.getElementById("btnAgregar");
+const btnIniciar=document.getElementById("btnIniciar");
 
-const polloEntero=document.getElementById("polloEntero");
-const medioPollo=document.getElementById("medioPollo");
+const btnReten=document.getElementById("btnReten");
 
-// ===== ACTUALIZAR PANTALLA =====
 
-function actualizar(){
+// ---------- GUARDAR ----------
 
-    stockActual.innerText=stock;
+function guardar(){
 
-    document.getElementById("caliu").innerText=cocina.caliu;
-    document.getElementById("fritas").innerText=cocina.fritas;
-    document.getElementById("bravas").innerText=cocina.bravas;
-    document.getElementById("panes").innerText=cocina.panes;
-    document.getElementById("canelones").innerText=cocina.canelones;
-
-    localStorage.setItem("stock",stock);
-    localStorage.setItem("cocina",JSON.stringify(cocina));
+    localStorage.setItem(
+        "estado",
+        JSON.stringify(estado)
+    );
 
 }
 
-// ===== AÑADIR STOCK =====
 
-btnAgregar.onclick=()=>{
+// ---------- ACTUALIZAR ----------
+
+function actualizarPantalla(){
+
+    stockActual.innerText=estado.stock;
+
+    document.getElementById("totalCaliu").innerText=
+    estado.cocina.caliu;
+
+    document.getElementById("totalFritas").innerText=
+    estado.cocina.fritas;
+
+    document.getElementById("totalBravas").innerText=
+    estado.cocina.bravas;
+
+    document.getElementById("totalMediaCaliu").innerText=
+    estado.cocina.mediaCaliu;
+
+    document.getElementById("totalPan").innerText=
+    estado.cocina.pan;
+
+    document.getElementById("totalCanelones").innerText=
+    estado.cocina.canelones;
+
+    if(estado.iniciado){
+
+        stockInicial.disabled=true;
+
+        btnIniciar.disabled=true;
+
+    }
+
+    guardar();
+
+}
+
+
+// ---------- INICIAR DIA ----------
+
+btnIniciar.onclick=()=>{
 
     let cantidad=Number(stockInicial.value);
 
-    if(cantidad<=0) return;
+    if(cantidad<=0){
 
-    stock+=cantidad;
+        alert("Introduce el stock inicial");
 
-    stockInicial.value="";
-
-    actualizar();
-
-};
-
-// ===== POLLO ENTERO =====
-
-polloEntero.onclick=()=>{
-
-    if(stock>=1){
-
-        stock-=1;
-
-        actualizar();
+        return;
 
     }
 
+    estado.stock=cantidad;
+
+    estado.stockInicial=cantidad;
+
+    estado.iniciado=true;
+
+    actualizarPantalla();
+
 };
 
-// ===== MEDIO POLLO =====
 
-medioPollo.onclick=()=>{
+// ---------- RETEN ----------
 
-    if(stock>=0.5){
+btnReten.onclick=()=>{
 
-        stock-=0.5;
+    if(!estado.iniciado){
 
-        actualizar();
+        alert("Primero inicia el día");
+
+        return;
 
     }
 
+    let cantidad=prompt("¿Cuántos pollos entran de retén?");
+
+    if(cantidad===null)return;
+
+    cantidad=Number(cantidad);
+
+    if(cantidad<=0)return;
+
+    estado.stock+=cantidad;
+
+    actualizarPantalla();
+
 };
 
-actualizar();
+
+// ---------- CARGAR ----------
+
+actualizarPantalla();
