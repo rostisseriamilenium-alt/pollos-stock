@@ -1,86 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Pollos</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Control Pollos</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="contenedor">
 
-    <h1>🐔 STOCK DE POLLOS</h1>
+<h1>🐔 CONTROL DE POLLOS</h1>
 
-    <div class="stock">
-        <div id="stockActual">0</div>
-    </div>
+<section class="stock">
 
-    <div class="inicio">
-        <label>Stock inicial</label>
+<h2>Stock de pollos</h2>
 
-        <div class="fila">
-            <input type="number" id="stockInicial" placeholder="0">
-            <button id="btnAgregar">+ Añadir</button>
-        </div>
-    </div>
+<div id="stockActual" class="numero">0</div>
 
-    <hr>
+<div class="inicioDia">
 
-    <h2>Venta rápida</h2>
+<input
+type="number"
+id="stockInicial"
+placeholder="Stock inicial">
 
-    <div class="botones2">
+<button id="btnIniciar">
+INICIAR DÍA
+</button>
 
-        <button id="polloEntero">
-            🐔<br>Pollo entero
-        </button>
+<button id="btnReten">
++ RETÉN
+</button>
 
-        <button id="medioPollo">
-            🍗<br>Medio pollo
-        </button>
+</div>
 
-    </div>
+</section>
 
-    <hr>
 
-    <h2>Packs</h2>
+<section>
 
-    <div class="packs">
+<h2>Venta rápida</h2>
 
-        <button id="pack2">PACK 2</button>
+<div class="venta">
 
-        <button id="pack3">PACK 3</button>
+<div class="card">
 
-        <button id="pack1">PACK 1/2</button>
+<h3>🐔 Pollo entero</h3>
 
-    </div>
+<div class="cantidad">
 
-    <hr>
+<button class="menos" data-target="polloCantidad">-</button>
 
-    <h2>Resumen cocina</h2>
+<span id="polloCantidad">1</span>
 
-    <div class="resumen">
+<button class="mas" data-target="polloCantidad">+</button>
 
-        <p>🥔 Patatas Caliu: <span id="caliu">0</span></p>
+</div>
 
-        <p>🍟 Patatas Fritas: <span id="fritas">0</span></p>
+<button id="venderPollo" class="verde">
+VENDER
+</button>
 
-        <p>🌶️ Patatas Bravas: <span id="bravas">0</span></p>
+</div>
 
-        <p>🥖 Panes: <span id="panes">0</span></p>
 
-        <p>🥟 Canelones: <span id="canelones">0</span></p>
+<div class="card">
 
-    </div>
+<h3>🍗 Medio pollo</h3>
 
-    <div class="inferior">
+<div class="cantidad">
 
-        <button id="deshacer">↩️ Deshacer</button>
+<button class="menos" data-target="medioCantidad">-</button>
 
-        <button id="reiniciar">🔴 Reiniciar día</button>
+<span id="medioCantidad">1</span>
 
-    </div>
+<button class="mas" data-target="medioCantidad">+</button>
+
+</div>
+
+<button id="venderMedio" class="verde">
+VENDER
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<h2>Packs</h2>
+
+<div class="packs">
+
+<div class="card">
+
+<h3>PACK 2</h3>
+
+<div class="cantidad">
+
+<button class="menos" data-target="pack2Cantidad">-</button>
+
+<span id="pack2Cantidad">1</span>
+
+<button class="mas" data-target="pack2Cantidad">+</button>
+
+</div>
+
+<button id="pack2" class="azul">
+PACK 2
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>PACK 3</h3>
+
+<div class="cantidad">
+
+<button class="menos" data-target="pack3Cantidad">-</button>
+
+<span id="pack3Cantidad">1</span>
+
+<button class="mas" data-target="pack3Cantidad">+</button>
+
+</div>
+
+<button id="pack3" class="azul">
+PACK 3
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>PACK 1/2</h3>
+
+<div class="cantidad">
+
+<button class="menos" data-target="pack1Cantidad">-</button>
+
+<span id="pack1Cantidad">1</span>
+
+<button class="mas" data-target="pack1Cantidad">+</button>
+
+</div>
+
+<button id="pack1" class="naranja">
+PACK 1/2
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<h2>Venta de productos sueltos</h2>
+
+<div class="sueltos">
+
+<button id="caliuSolo">
+🥔 Caliu
+</button>
+
+<button id="fritasSolo">
+🍟 Fritas
+</button>
+
+<button id="bravasSolo">
+🌶️ Bravas
+</button>
+
+<button id="panSolo">
+🥖 Pan
+</button>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+<h2>Resumen cocina</h2>
+
+<div class="resumen">
+
+<div>🥔 Patatas Caliu <span id="totalCaliu">0</span></div>
+
+<div>🍟 Patatas Fritas <span id="totalFritas">0</span></div>
+
+<div>🌶️ Patatas Bravas <span id="totalBravas">0</span></div>
+
+<div>🥔 Medias Caliu Pack 1/2 <span id="totalMediaCaliu">0</span></div>
+
+<div>🥖 Panes <span id="totalPan">0</span></div>
+
+<div>🥟 Canelones <span id="totalCanelones">0</span></div>
+
+</div>
+
+</section>
+
+
+
+<section class="inferior">
+
+<button id="deshacer">
+↩️ DESHACER ÚLTIMA VENTA
+</button>
+
+<button id="reiniciar">
+🔴 REINICIAR DÍA
+</button>
+
+</section>
 
 </div>
 
