@@ -212,5 +212,47 @@ button:hover{
 .numero{
     font-size:70px;
 }
+.selectorPatatas{
 
+    margin-top:20px;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+}
+
+.oculto{
+
+    display:none;
+
+}
+
+.botonesPatatas{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+.botonesPatatas button{
+
+    flex:1;
+
+    background:#1976d2;
+
+    color:white;
+
+    padding:20px;
+
+    font-size:24px;
+
+}
 }
