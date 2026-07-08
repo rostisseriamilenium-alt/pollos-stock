@@ -4,12 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Pollos</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <script src="app.js"></script>
+<div class="contenedor">
+
+    <h1>🐔 STOCK DE POLLOS</h1>
+
+    <div class="stock">
+        <div id="stockActual">0</div>
+    </div>
+
+    <div class="inicio">
+        <label>Stock inicial</label>
+
+        <div class="fila">
+            <input type="number" id="stockInicial" placeholder="0">
+            <button id="btnAgregar">+ Añadir</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>Venta rápida</h2>
+
+    <div class="botones2">
+
+        <button id="polloEntero">
+            🐔<br>Pollo entero
+        </button>
+
+        <button id="medioPollo">
+            🍗<br>Medio pollo
+        </button>
+
+    </div>
+
+    <hr>
+
+    <h2>Packs</h2>
+
+    <div class="packs">
+
+        <button id="pack2">PACK 2</button>
+
+        <button id="pack3">PACK 3</button>
+
+        <button id="pack1">PACK 1/2</button>
+
+    </div>
+
+    <hr>
+
+    <h2>Resumen cocina</h2>
+
+    <div class="resumen">
+
+        <p>🥔 Patatas Caliu: <span id="caliu">0</span></p>
+
+        <p>🍟 Patatas Fritas: <span id="fritas">0</span></p>
+
+        <p>🌶️ Patatas Bravas: <span id="bravas">0</span></p>
+
+        <p>🥖 Panes: <span id="panes">0</span></p>
+
+        <p>🥟 Canelones: <span id="canelones">0</span></p>
+
+    </div>
+
+    <div class="inferior">
+
+        <button id="deshacer">↩️ Deshacer</button>
+
+        <button id="reiniciar">🔴 Reiniciar día</button>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
 
 </body>
 </html>
