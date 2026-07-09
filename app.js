@@ -229,3 +229,142 @@ btnMedio.addEventListener("click", () => {
     actualizar();
 
 });
+// =======================================
+// VENTA DE POLLO Y MEDIO POLLO
+// =======================================
+
+// Cantidades
+
+let cantidadPollo = 1;
+let cantidadMedio = 1;
+
+// Mostrar cantidades
+
+document.getElementById("polloCantidad").textContent = cantidadPollo;
+document.getElementById("medioCantidad").textContent = cantidadMedio;
+
+
+// BOTONES +
+
+document.querySelectorAll(".mas").forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        if(btn.dataset.target==="polloCantidad"){
+
+            if(cantidadPollo<6){
+
+                cantidadPollo++;
+
+                document.getElementById("polloCantidad").textContent=cantidadPollo;
+
+            }
+
+        }
+
+        if(btn.dataset.target==="medioCantidad"){
+
+            if(cantidadMedio<6){
+
+                cantidadMedio++;
+
+                document.getElementById("medioCantidad").textContent=cantidadMedio;
+
+            }
+
+        }
+
+    });
+
+});
+
+
+// BOTONES -
+
+document.querySelectorAll(".menos").forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        if(btn.dataset.target==="polloCantidad"){
+
+            if(cantidadPollo>1){
+
+                cantidadPollo--;
+
+                document.getElementById("polloCantidad").textContent=cantidadPollo;
+
+            }
+
+        }
+
+        if(btn.dataset.target==="medioCantidad"){
+
+            if(cantidadMedio>1){
+
+                cantidadMedio--;
+
+                document.getElementById("medioCantidad").textContent=cantidadMedio;
+
+            }
+
+        }
+
+    });
+
+});
+
+
+// VENDER POLLO
+
+document.getElementById("venderPollo").addEventListener("click",()=>{
+
+    if(!estado.iniciado){
+
+        alert("Primero inicia el día");
+
+        return;
+
+    }
+
+    if(estado.stock<cantidadPollo){
+
+        alert("No hay suficientes pollos");
+
+        return;
+
+    }
+
+    estado.stock-=cantidadPollo;
+
+    actualizar();
+
+});
+
+
+// VENDER MEDIO
+
+document.getElementById("venderMedio").addEventListener("click",()=>{
+
+    if(!estado.iniciado){
+
+        alert("Primero inicia el día");
+
+        return;
+
+    }
+
+    let venta=cantidadMedio*0.5;
+
+    if(estado.stock<venta){
+
+        alert("No hay suficientes pollos");
+
+        return;
+
+    }
+
+    estado.stock-=venta;
+
+    actualizar();
+
+});
