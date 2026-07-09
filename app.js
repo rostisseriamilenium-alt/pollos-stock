@@ -1,42 +1,60 @@
-// ===== CONTROL DE STOCK =====
+// ======================================
+// APP.JS - PARTE 1
+// Estado + Stock + Venta rápida
+// ======================================
+
+// ---------- ESTADO ----------
 
 let estado = JSON.parse(localStorage.getItem("estado")) || {
     iniciado: false,
     stock: 0,
 
-    cocina:{
-        caliu:0,
-        fritas:0,
-        bravas:0,
-        pan:0,
-        canelones:0,
-        pack1:0
-    }
+    cocina: {
+        caliu: 0,
+        fritas: 0,
+        bravas: 0,
+        pan: 0,
+        canelones: 0,
+        pack1: 0
+    },
+
+    historial: []
 };
+
+// ---------- ELEMENTOS ----------
 
 const stockActual = document.getElementById("stockActual");
 const stockInicial = document.getElementById("stockInicial");
 const btnIniciar = document.getElementById("btnIniciar");
 const btnReten = document.getElementById("btnReten");
-// =======================
-// BOTONES VENTA
-// =======================
 
-const btnPollo = document.getElementById("venderPollo");
-const btnMedio = document.getElementById("venderMedio");
+// ---------- CANTIDADES ----------
 
-let cantidadPollo = 1;
-let cantidadMedio = 1;
+let cantidades = {
+    pollo: 1,
+    medio: 1,
+    pack2: 1,
+    pack3: 1,
+    pack1: 1
+};
 
-document.getElementById("polloCantidad").textContent = cantidadPollo;
-document.getElementById("medioCantidad").textContent = cantidadMedio;
+// ---------- GUARDAR ----------
 
 function guardar() {
     localStorage.setItem("estado", JSON.stringify(estado));
 }
+
+// ---------- ACTUALIZAR ----------
+
 function actualizar() {
 
     stockActual.textContent = estado.stock;
+
+    document.getElementById("polloCantidad").textContent = cantidades.pollo;
+    document.getElementById("medioCantidad").textContent = cantidades.medio;
+    document.getElementById("pack2Cantidad").textContent = cantidades.pack2;
+    document.getElementById("pack3Cantidad").textContent = cantidades.pack3;
+    document.getElementById("pack1Cantidad").textContent = cantidades.pack1;
 
     document.getElementById("totalCaliu").textContent = estado.cocina.caliu;
     document.getElementById("totalFritas").textContent = estado.cocina.fritas;
@@ -51,11 +69,13 @@ function actualizar() {
     guardar();
 }
 
-btnIniciar.addEventListener("click", () => {
+// ---------- INICIAR DÍA ----------
 
-    const cantidad = parseInt(stockInicial.value);
+btnIniciar.onclick = () => {
 
-    if (isNaN(cantidad) || cantidad <= 0) {
+    const cantidad = Number(stockInicial.value);
+
+    if (cantidad <= 0) {
         alert("Introduce el stock inicial");
         return;
     }
@@ -65,159 +85,99 @@ btnIniciar.addEventListener("click", () => {
 
     actualizar();
 
-});
+};
 
-btnReten.addEventListener("click", () => {
+// ---------- RETÉN ----------
+
+btnReten.onclick = () => {
 
     if (!estado.iniciado) {
         alert("Primero inicia el día");
         return;
     }
 
-    const txt = prompt("¿Cuántos pollos añades?");
+    let cantidad = prompt("¿Cuántos pollos entran de retén?");
 
-    if (txt === null) return;
+    if (cantidad === null) return;
 
-    const cantidad = parseInt(txt);
+    cantidad = Number(cantidad);
 
-    if (isNaN(cantidad) || cantidad <= 0) return;
+    if (cantidad <= 0) return;
 
     estado.stock += cantidad;
 
     actualizar();
 
-});
-
-document.getElementById("reiniciar").addEventListener("click", () => {
-
-    if (!confirm("¿Reiniciar día?")) return;
-
-    localStorage.removeItem("estado");
-
- estado = {
-    iniciado:false,
-    stock:0,
-
-    cocina:{
-        caliu:0,
-        fritas:0,
-        bravas:0,
-        pan:0,
-        canelones:0,
-        pack1:0
-    }
 };
 
-    stockInicial.value = "";
+// ---------- BOTONES + / - ----------
 
-    actualizar();
+document.querySelectorAll(".mas").forEach(btn => {
 
-});
+    btn.onclick = () => {
 
-actualizar();
-// =======================
-// BOTONES + Y -
-// =======================
+        const id = btn.dataset.target;
 
-document.querySelectorAll(".mas").forEach(btn=>{
+        if (id === "polloCantidad" && cantidades.pollo < 6) cantidades.pollo++;
+        if (id === "medioCantidad" && cantidades.medio < 6) cantidades.medio++;
+        if (id === "pack2Cantidad" && cantidades.pack2 < 6) cantidades.pack2++;
+        if (id === "pack3Cantidad" && cantidades.pack3 < 6) cantidades.pack3++;
+        if (id === "pack1Cantidad" && cantidades.pack1 < 6) cantidades.pack1++;
 
-    btn.onclick=()=>{
+        actualizar();
 
-        if(btn.dataset.target==="polloCantidad"){
-
-            if(cantidadPollo<6){
-
-                cantidadPollo++;
-
-                document.getElementById("polloCantidad").textContent=cantidadPollo;
-
-            }
-
-        }
-
-        if(btn.dataset.target==="medioCantidad"){
-
-            if(cantidadMedio<6){
-
-                cantidadMedio++;
-
-                document.getElementById("medioCantidad").textContent=cantidadMedio;
-
-            }
-
-        }
-
-    }
+    };
 
 });
 
+document.querySelectorAll(".menos").forEach(btn => {
 
-document.querySelectorAll(".menos").forEach(btn=>{
+    btn.onclick = () => {
 
-    btn.onclick=()=>{
+        const id = btn.dataset.target;
 
-        if(btn.dataset.target==="polloCantidad"){
+        if (id === "polloCantidad" && cantidades.pollo > 1) cantidades.pollo--;
+        if (id === "medioCantidad" && cantidades.medio > 1) cantidades.medio--;
+        if (id === "pack2Cantidad" && cantidades.pack2 > 1) cantidades.pack2--;
+        if (id === "pack3Cantidad" && cantidades.pack3 > 1) cantidades.pack3--;
+        if (id === "pack1Cantidad" && cantidades.pack1 > 1) cantidades.pack1--;
 
-            if(cantidadPollo>1){
+        actualizar();
 
-                cantidadPollo--;
-
-                document.getElementById("polloCantidad").textContent=cantidadPollo;
-
-            }
-
-        }
-
-        if(btn.dataset.target==="medioCantidad"){
-
-            if(cantidadMedio>1){
-
-                cantidadMedio--;
-
-                document.getElementById("medioCantidad").textContent=cantidadMedio;
-
-            }
-
-        }
-
-    }
+    };
 
 });
-// =======================
-// VENDER POLLO ENTERO
-// =======================
 
-btnPollo.addEventListener("click", () => {
+// ---------- VENDER POLLO ----------
+
+document.getElementById("venderPollo").onclick = () => {
 
     if (!estado.iniciado) {
         alert("Primero inicia el día");
         return;
     }
 
-    if (estado.stock < cantidadPollo) {
+    if (estado.stock < cantidades.pollo) {
         alert("No hay suficientes pollos");
         return;
     }
 
-    estado.stock -= cantidadPollo;
+    estado.stock -= cantidades.pollo;
 
     actualizar();
 
-});
+};
 
+// ---------- VENDER MEDIO ----------
 
-// =======================
-// VENDER MEDIO POLLO
-// =======================
-
-btnMedio.addEventListener("click", () => {
+document.getElementById("venderMedio").onclick = () => {
 
     if (!estado.iniciado) {
         alert("Primero inicia el día");
         return;
     }
 
-    let venta = cantidadMedio * 0.5;
+    const venta = cantidades.medio * 0.5;
 
     if (estado.stock < venta) {
         alert("No hay suficientes pollos");
@@ -228,143 +188,6 @@ btnMedio.addEventListener("click", () => {
 
     actualizar();
 
-});
-// =======================================
-// VENTA DE POLLO Y MEDIO POLLO
-// =======================================
+};
 
-// Cantidades
-
-let cantidadPollo = 1;
-let cantidadMedio = 1;
-
-// Mostrar cantidades
-
-document.getElementById("polloCantidad").textContent = cantidadPollo;
-document.getElementById("medioCantidad").textContent = cantidadMedio;
-
-
-// BOTONES +
-
-document.querySelectorAll(".mas").forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-        if(btn.dataset.target==="polloCantidad"){
-
-            if(cantidadPollo<6){
-
-                cantidadPollo++;
-
-                document.getElementById("polloCantidad").textContent=cantidadPollo;
-
-            }
-
-        }
-
-        if(btn.dataset.target==="medioCantidad"){
-
-            if(cantidadMedio<6){
-
-                cantidadMedio++;
-
-                document.getElementById("medioCantidad").textContent=cantidadMedio;
-
-            }
-
-        }
-
-    });
-
-});
-
-
-// BOTONES -
-
-document.querySelectorAll(".menos").forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-        if(btn.dataset.target==="polloCantidad"){
-
-            if(cantidadPollo>1){
-
-                cantidadPollo--;
-
-                document.getElementById("polloCantidad").textContent=cantidadPollo;
-
-            }
-
-        }
-
-        if(btn.dataset.target==="medioCantidad"){
-
-            if(cantidadMedio>1){
-
-                cantidadMedio--;
-
-                document.getElementById("medioCantidad").textContent=cantidadMedio;
-
-            }
-
-        }
-
-    });
-
-});
-
-
-// VENDER POLLO
-
-document.getElementById("venderPollo").addEventListener("click",()=>{
-
-    if(!estado.iniciado){
-
-        alert("Primero inicia el día");
-
-        return;
-
-    }
-
-    if(estado.stock<cantidadPollo){
-
-        alert("No hay suficientes pollos");
-
-        return;
-
-    }
-
-    estado.stock-=cantidadPollo;
-
-    actualizar();
-
-});
-
-
-// VENDER MEDIO
-
-document.getElementById("venderMedio").addEventListener("click",()=>{
-
-    if(!estado.iniciado){
-
-        alert("Primero inicia el día");
-
-        return;
-
-    }
-
-    let venta=cantidadMedio*0.5;
-
-    if(estado.stock<venta){
-
-        alert("No hay suficientes pollos");
-
-        return;
-
-    }
-
-    estado.stock-=venta;
-
-    actualizar();
-
-});
+actualizar();
