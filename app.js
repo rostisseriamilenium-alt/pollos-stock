@@ -18,6 +18,18 @@ const stockActual = document.getElementById("stockActual");
 const stockInicial = document.getElementById("stockInicial");
 const btnIniciar = document.getElementById("btnIniciar");
 const btnReten = document.getElementById("btnReten");
+// =======================
+// BOTONES VENTA
+// =======================
+
+const btnPollo = document.getElementById("venderPollo");
+const btnMedio = document.getElementById("venderMedio");
+
+let cantidadPollo = 1;
+let cantidadMedio = 1;
+
+document.getElementById("polloCantidad").textContent = cantidadPollo;
+document.getElementById("medioCantidad").textContent = cantidadMedio;
 
 function guardar() {
     localStorage.setItem("estado", JSON.stringify(estado));
@@ -103,3 +115,71 @@ document.getElementById("reiniciar").addEventListener("click", () => {
 });
 
 actualizar();
+// =======================
+// BOTONES + Y -
+// =======================
+
+document.querySelectorAll(".mas").forEach(btn=>{
+
+    btn.onclick=()=>{
+
+        if(btn.dataset.target==="polloCantidad"){
+
+            if(cantidadPollo<6){
+
+                cantidadPollo++;
+
+                document.getElementById("polloCantidad").textContent=cantidadPollo;
+
+            }
+
+        }
+
+        if(btn.dataset.target==="medioCantidad"){
+
+            if(cantidadMedio<6){
+
+                cantidadMedio++;
+
+                document.getElementById("medioCantidad").textContent=cantidadMedio;
+
+            }
+
+        }
+
+    }
+
+});
+
+
+document.querySelectorAll(".menos").forEach(btn=>{
+
+    btn.onclick=()=>{
+
+        if(btn.dataset.target==="polloCantidad"){
+
+            if(cantidadPollo>1){
+
+                cantidadPollo--;
+
+                document.getElementById("polloCantidad").textContent=cantidadPollo;
+
+            }
+
+        }
+
+        if(btn.dataset.target==="medioCantidad"){
+
+            if(cantidadMedio>1){
+
+                cantidadMedio--;
+
+                document.getElementById("medioCantidad").textContent=cantidadMedio;
+
+            }
+
+        }
+
+    }
+
+});
