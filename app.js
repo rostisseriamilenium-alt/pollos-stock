@@ -183,3 +183,49 @@ document.querySelectorAll(".menos").forEach(btn=>{
     }
 
 });
+// =======================
+// VENDER POLLO ENTERO
+// =======================
+
+btnPollo.addEventListener("click", () => {
+
+    if (!estado.iniciado) {
+        alert("Primero inicia el día");
+        return;
+    }
+
+    if (estado.stock < cantidadPollo) {
+        alert("No hay suficientes pollos");
+        return;
+    }
+
+    estado.stock -= cantidadPollo;
+
+    actualizar();
+
+});
+
+
+// =======================
+// VENDER MEDIO POLLO
+// =======================
+
+btnMedio.addEventListener("click", () => {
+
+    if (!estado.iniciado) {
+        alert("Primero inicia el día");
+        return;
+    }
+
+    let venta = cantidadMedio * 0.5;
+
+    if (estado.stock < venta) {
+        alert("No hay suficientes pollos");
+        return;
+    }
+
+    estado.stock -= venta;
+
+    actualizar();
+
+});
